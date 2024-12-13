@@ -27,3 +27,8 @@ By solving this problem, public health organizations can improve vaccination out
 The datasets in use were obtained from [Driven Data](https://www.drivendata.org/competitions/66/flu-shot-learning/). Each row in the datasets represents one person who responded to the National 2009 H1N1 Flu Survey. 
 
 The datasets contain demographic information such as age, health behavior data such as health insurance status and opinions and attitude information such as level of concern about the H1N1 flu, etc.
+
+## Data Cleaning
+- I dropped columns with more than 30% of missing values because it would have been difficult to impute meaningful values without introducing bias or noise. Dropping them helps maintain data integrity and simplifies the analysis.
+- I then imputed columns with datatype 'float' with their median because median is less affected by extreme values compared to the mean and for numerical data, the median maintains the central tendency without skewing the distribution. Also some of those columns had categorical data just represented by float numbers like 0 and 1.
+- I finally filled the missing values of columns with datatype 'object' with 'unknown' to preserve data integrity and because it is simple and clear; it is an interpretable value that doesn't distort the dataset's meaning.
