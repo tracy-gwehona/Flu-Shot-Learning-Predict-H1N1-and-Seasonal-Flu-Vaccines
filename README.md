@@ -1,6 +1,6 @@
 # Flu Shot Learning: Predict H1N1 and Seasonal Flu Vaccines
 
-![image](https://github.com/user-attachments/assets/40ba0c7a-c5ab-44ff-93a6-2199a6e25de1)
+![image](https://github.com/user-attachments/assets/86224035-5ee2-406b-8ff4-8f0204f08a61)
 
 Author: [Tracy Gwehona](tracy.gwehona@gmail.com)
 
@@ -31,4 +31,18 @@ The datasets contain demographic information such as age, health behavior data s
 ## Data Cleaning
 - I dropped columns with more than 30% of missing values because it would have been difficult to impute meaningful values without introducing bias or noise. Dropping them helps maintain data integrity and simplifies the analysis.
 - I then imputed columns with datatype 'float' with their median because median is less affected by extreme values compared to the mean and for numerical data, the median maintains the central tendency without skewing the distribution. Also some of those columns had categorical data just represented by float numbers like 0 and 1.
-- I finally filled the missing values of columns with datatype 'object' with 'unknown' to preserve data integrity and because it is simple and clear; it is an interpretable value that doesn't distort the dataset's meaning.
+- I filled the missing values of columns with datatype 'object' with 'unknown' to preserve data integrity and because it is simple and clear; it is an interpretable value that doesn't distort the dataset's meaning.
+- I finally converted categorical variables into numerical values by using OneHotEncoder and LabelEncoder.
+
+## Modelling
+I used the `Random Forest` classifier.
+
+## Evaluation
+The model's performance was evaluated by use of roc-auc score.
+
+**Results**
+- **H1N1 Vaccine ROC AUC: 0.8239**: This indicates good predictive performance for the H1N1 vaccine, as values above 0.8 suggest a strong model.
+- **Seasonal Vaccine ROC AUC: 0.8475**: This shows even better performance for predicting the seasonal flu vaccine.
+
+✅ **Overall Score: 0.8357**
+This is a strong performance, suggesting the model is well-calibrated and performing consistently across both target variables.
