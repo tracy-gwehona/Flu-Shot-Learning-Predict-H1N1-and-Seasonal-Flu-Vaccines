@@ -35,14 +35,94 @@ The datasets contain demographic information such as age, health behavior data s
 - I finally converted categorical variables into numerical values by using OneHotEncoder and LabelEncoder.
 
 ## Modelling
-I used the `Random Forest` classifier.
+I utilized a couple of models:
+1. **Random Forest Classifier**.
+2. **XGBoost Classifier**.
+3. **CatBoost Classifier**.
+4. **Voting Classifier**
 
 ## Evaluation
 The model's performance was evaluated by use of roc-auc score.
 
-**Results**
+### Results
+#### 1. Random Forest Classifier
 - **H1N1 Vaccine ROC AUC: 0.8239**: This indicates good predictive performance for the H1N1 vaccine, as values above 0.8 suggest a strong model.
 - **Seasonal Vaccine ROC AUC: 0.8475**: This shows even better performance for predicting the seasonal flu vaccine.
 
-✅ **Overall Score: 0.8357**
-This is a strong performance, suggesting the model is well-calibrated and performing consistently across both target variables.
+✅ **Overall Score: 0.8357**: This is a strong performance, suggesting the model is well-calibrated and performing consistently across both target variables.
+
+**`Tuning the parameters`**,
+
+- **H1N1 Vaccine ROC AUC: 0.8299**: This shows a slight improvement in predictive performance for the H1N1 vaccine, demonstrating that the optimization has helped the model to make more accurate predictions compared to the non-optimized version (0.8239).
+- **Seasonal Vaccine ROC AUC: 0.8515**: Similarly, the seasonal flu vaccine prediction has improved slightly, with the optimized model performing better than the non-optimized version (0.8475).
+
+✅ **Overall Score: 0.8407**: The overall performance improves from 0.8357 to 0.8407, indicating a more robust model after optimization.
+
+The optimized Random Forest model provides a slight boost in ROC AUC scores for both target variables (H1N1 and Seasonal vaccines), improving by 0.0060 and 0.0040, respectively.
+The overall ROC AUC score increases by 0.0050, showing a slight but noticeable improvement in model performance.
+
+**Conclusion**: 
+
+While the improvements are modest, the optimized Random Forest model outperforms the non-optimized version, making it the more reliable model in terms of predictive accuracy for both target variables.
+
+
+#### 2. XGBoost Classifier
+- **H1N1 Vaccine ROC AUC: 0.8124**: This indicates decent predictive performance for the H1N1 vaccine. While values above 0.8 suggest a strong model, this score is slightly lower than the optimized Random Forest model, which had a higher AUC of 0.82998, demonstrating that the Random Forest model performed a bit better in predicting the H1N1 vaccine.
+- **Seasonal Vaccine ROC AUC: 0.8450**: This shows a comparable performance for predicting the seasonal flu vaccine, with the XGBoost model showing an AUC close to that of the optimized Random Forest model (0.85148). Though the scores are nearly identical, the Random Forest model still slightly outperforms the XGBoost model here.
+
+✅ **Overall Score: 0.8287**: While the XGBoost model performs well, the overall score is slightly lower than the optimized Random Forest model's 0.84073. This suggests that the Random Forest model has more consistent performance across both target variables, whereas the XGBoost model is performing slightly weaker in comparison.
+
+**Conclusion**:
+
+The **optimized Random Forest model** outperforms the **non-optimized XGBoost model** in both target variables (H1N1 and Seasonal vaccine) and the overall ROC AUC score. This suggests that, in this case, the Random Forest model is better at making accurate predictions than the non-optimized XGBoost model. 
+
+However, further optimization of the XGBoost model could potentially improve its performance and allow it to compete more closely with the Random Forest model.
+
+**`Tuning the parameters`**,
+
+- **H1N1 Vaccine ROC AUC: 0.8344**: This shows a solid performance for predicting the H1N1 vaccine, with a slight improvement over the non-optimized XGBoost score of 0.81237.
+- **Seasonal Vaccine ROC AUC: 0.8582**: The performance for predicting the seasonal flu vaccine is significantly better, surpassing both the non-optimized XGBoost score (0.84504) and optimized Random Forest (0.85148).
+
+✅ **Overall ROC AUC Score: 0.8463**: This score is an improvement over both the non-optimized XGBoost (0.8287) and optimized Random Forest (0.84073). It indicates that Optimized XGBoost is performing better overall.
+
+**Conclusion**:
+
+**Optimized XGBoost** appears to outperform **Optimized Random Forest** overall. It has stronger predictive power, especially for the _Seasonal vaccine_, but the _H1N1 vaccine_ performance is quite similar across both models.
+
+#### 3. CatBoost Classifier
+- **H1N1 Vaccine ROC AUC Score: 0.8279**: The CatBoost model shows solid performance for predicting the H1N1 vaccine, though it is slightly lower than the optimized XGBoost score of 0.8344. This indicates that the CatBoost model could benefit from further tuning to match XGBoost's performance in this area.
+- **Seasonal Vaccine ROC AUC Score: 0.8579**: The CatBoost model performs very well in predicting the seasonal vaccine, with a score of 0.8579, which is very close to the optimized XGBoost score of 0.8582. This indicates that the CatBoost model is highly effective at this task, showing minimal performance difference compared to XGBoost.
+
+✅ **Overall ROC AUC Score: 0.8429**: Performance is slightly lower than XGBoost's 0.8463. While there is a small performance gap, CatBoost still provides strong predictive power, especially in handling categorical features and dataset characteristics that may benefit from its tree-based structure.
+
+**Conclusion**:
+
+CatBoost shows **strong performance overall**, with minimal difference from Optimized XGBoost. Fine-tuning the hyperparameters could further improve its performance, especially for tasks like predicting the H1N1 vaccine.
+
+**`Tuning the parameters`**,
+
+- **H1N1 Vaccine ROC AUC: 0.8351**: Slightly outperforms Optimized XGBoost (0.8344), showing a marginal improvement in predicting H1N1 vaccination.
+- **Seasonal Vaccine ROC AUC: 0.8570**: Performs slightly lower than Optimized XGBoost (0.8582), but still highly competitive.
+
+✅ **Overall ROC AUC Score: 0.8461**: Almost identical to Optimized XGBoost (0.8463), indicating both models are performing at a similar level.
+
+**Conclusion**:
+
+Optimized CatBoost and XGBoost are closely matched, with CatBoost performing slightly better for H1N1 but XGBoost excelling for Seasonal vaccine. Both models are strong choices, with minimal differences in overall performance. 
+
+**NOTE**:
+
+To leverage the strengths of each model and further improve predictive performance, I will apply an ensemble method using a Voting Classifier. This ensemble method will combine the predictions of the three models—Optimized Random Forest, Optimized XGBoost, and Optimized CatBoost—allowing us to make the final prediction based on the majority vote. By using this approach, we aim to enhance accuracy, reduce overfitting, and create a more robust model that benefits from the diverse strengths of each individual algorithm.
+
+#### 4. Voting Classifier
+The Voting Classifier has shown a slight improvement in performance over the individual models:
+- **H1N1 Vaccine ROC AUC: 0.83585**: This is a small but noticeable improvement over the Optimized XGBoost score of 0.83440 and CatBoost score of 0.82793 for H1N1 prediction, indicating better model performance due to the ensemble approach.
+- **Seasonal Vaccine ROC AUC: 0.85785**: The Voting Classifier also performs better for the Seasonal vaccine, with a slight boost compared to Optimized XGBoost's 0.85823, showing that combining the models helps to balance out their strengths.
+
+✅ **Overall ROC AUC Score: 0.84685**: The Voting Classifier achieves a marginal improvement over both Optimized XGBoost (0.84632) and CatBoost (0.84294), demonstrating that combining the models has led to better overall performance.
+
+**Conclusion**: 
+
+The **Voting Classifier** effectively combines the strengths of **Optimized Random Forest**, **Optimized XGBoost**, and **Optimized CatBoost**, leading to an overall improved performance in predicting both H1N1 and Seasonal vaccines. 
+
+This ensemble method enhances predictive power, making it a solid choice for the **final model**.
