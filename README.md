@@ -11,7 +11,10 @@ By predicting vaccination uptake based on these factors, insights can be gained 
 
 ## Business Understanding
 ### Stakeholders
-Public Health officials.
+1. **Public Health Organizations** – Agencies like the Centers for Disease Control and Prevention (CDC), World Health Organization (WHO), and local health departments that aim to improve vaccination rates and prevent flu outbreaks.
+2. **Government Agencies** – Ministries or departments of health that create vaccination policies and allocate resources for flu prevention programs.
+3. **Healthcare Providers** – Hospitals, clinics, and doctors who administer vaccines and need data-driven strategies to increase patient immunization rates.
+4. **Pharmaceutical Companies** – Vaccine manufacturers like Pfizer, Moderna, and Sanofi that could use insights to optimize vaccine distribution.
 
 ### Business Problem
 The primary goal of this project is to predict whether an individual received the H1N1 flu vaccine based on their demographic information, personal beliefs, and health behaviors. This binary classification task can help public health agencies:
